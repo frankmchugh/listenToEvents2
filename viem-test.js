@@ -1,9 +1,80 @@
 import { createPublicClient, http } from 'viem';
 import { mainnet } from 'viem/chains';
-import abi from './usdt.json';
+
 import express from 'express';
 
 const ethereumController = express();
+
+
+const abi = 
+[{
+  "type": "event",
+  "name": "Deposit",
+  "inputs": [
+    {
+      "indexed": true,
+      "name": "",
+      "type": "address"
+    },
+    {
+      "indexed": false,
+      "name": "",
+      "type": "uint256"
+    },
+    {
+      "indexed": false,
+      "name": "",
+      "type": "uint256"
+    },
+    {
+      "indexed": false,
+      "name": "",
+      "type": "uint256"
+    }
+  ]
+},
+{
+  "type": "event",
+  "name": "Drain",
+  "inputs": [
+    {
+      "indexed": true,
+      "name": "",
+      "type": "address"
+    },
+    {
+      "indexed": false,
+      "name": "",
+      "type": "uint256"
+    },
+    {
+      "indexed": false,
+      "name": "",
+      "type": "uint256"
+    }
+  ]
+},
+{
+  "type": "function",
+  "name": "deposit",
+  "inputs": [
+    {
+      "name": "",
+      "type": "uint256"
+    }
+  ],
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "payable": false
+},
+{
+  "type": "function",
+  "name": "drain",
+  "inputs": [],
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "payable": false
+}]
 
 function convertBigIntToJSON(obj) {
   if (typeof obj === 'bigint') {
