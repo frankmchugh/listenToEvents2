@@ -21,6 +21,8 @@
     "viem": "^1.14.0"
   },
   "devDependencies": {
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "nodemon": "^3.0.1"
   }
+  
 }
