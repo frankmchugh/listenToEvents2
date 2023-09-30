@@ -5,6 +5,11 @@ import express from 'express';
 
 const ethereumController = express();
 
+const client = createPublicClient({
+  chain: mainnet,
+  transport: http('https://eth-mainnet.g.alchemy.com/v2/iXYPKPNVzY3OKROW2emJzNoE3ooToaRa'),
+});
+
 
 const abi = 
 [{
@@ -93,10 +98,7 @@ function convertBigIntToJSON(obj) {
 
 ethereumController.get('/getAll', async (req, res) => {
   try {
-    const client = createPublicClient({
-      chain: mainnet,
-      transport: http('https://eth-mainnet.g.alchemy.com/v2/iXYPKPNVzY3OKROW2emJzNoE3ooToaRa'),
-    });
+   
 
     const logs = await client.getContractEvents({
       address: '0xfAaBbE302750635E3F918385a1aEb4A9eb45977a',
