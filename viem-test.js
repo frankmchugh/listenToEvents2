@@ -1,13 +1,16 @@
-import { createPublicClient, http } from 'viem';
+import { createPublicClient, http, webSocket, decodeEventLog } from 'viem';
 import { mainnet } from 'viem/chains';
 
 import express from 'express';
 
 const ethereumController = express();
 
+const transport = webSocket('wss://eth-mainnet.g.alchemy.com/v2/iXYPKPNVzY3OKROW2emJzNoE3ooToaRa');
+
+
 const client = createPublicClient({
   chain: mainnet,
-  transport: http('https://eth-mainnet.g.alchemy.com/v2/iXYPKPNVzY3OKROW2emJzNoE3ooToaRa'),
+  transport
 });
 
 
@@ -107,6 +110,17 @@ ethereumController.get('/getAll', async (req, res) => {
     });
 
     const processedLogs = convertBigIntToJSON(logs);
+    const decodedLogs = [];
+
+    processedLogs.forEach(element => {
+      const topics = decodeEventLog({
+        abi: abi,
+        data: element.data,
+        topics: [...element.topics]
+      })
+      
+      console.log(topics)
+    });
 
     res.json(processedLogs);
     
