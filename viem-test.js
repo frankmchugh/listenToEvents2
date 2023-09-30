@@ -1,6 +1,6 @@
 import { createPublicClient, http } from 'viem';
 import { mainnet } from 'viem/chains';
-import abi from './usdt.json' assert {type: "json"}
+import abi from './usdt.json';
 import express from 'express';
 
 const ethereumController = express();
